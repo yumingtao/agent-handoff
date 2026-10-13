@@ -64,6 +64,12 @@ still apply.
   and a review case that withholds the baseline; the reviewer agent assesses
   the referenced code from the packet alone, submits the assessment, and only
   then is the baseline revealed — an anti-anchoring A/B protocol.
+- **Prompt-driven, not command-driven**: install the `skills/` package once;
+  from then on any cross-agent intent triggers it — "have Codex independently
+  review this", "run a cross-model review", "review the latest handoff". The
+  agent does all MCP calls and, whenever follow-ups remain, hands you a
+  copy-ready ≤12-line prompt block for the next vendor's agent — the record
+  is the payload, the prompt is the pointer.
 - **Cross-vendor by design**: records carry `source_agent` / `model` platform
   IDs; one Claude session can hand off to Codex, Cursor, Copilot, Gemini, …
 - **Topic lifecycle**: every logical topic carries an explicit task state
@@ -91,12 +97,55 @@ npm install
 npm run build
 npm start            # http://127.0.0.1:4319
 
-# 3. Publish an agent event (optional)
+# 3. Publish an agent event (optional plumbing; daily use is prompt-driven — see below)
 cd ../agent-events
 node src/cli.mjs publish --project my-repo --workspace /abs/path/to/my-repo \
   --topic ISSUE-123 --agent codex --event-type task_progress \
   --payload '{"note":"investigating"}'
 ```
+
+## Daily usage: prompts, not commands
+
+The Quick start commands are plumbing — after install you never type them.
+Day to day you talk to the agent, and the [`skills/`](skills/) package turns
+that into a closed loop:
+
+**1 · Finish work in one agent**, then express cross-agent intent — any
+wording works:
+
+> Have Codex independently review this parser fix.
+
+No magic keyword: cross-agent review, independent review, or "continue the
+previous handoff" all trigger the skill. Publishing stays opt-in, though —
+an agent that merely reached a result never publishes behind your back.
+Once triggered, the agent publishes the structured conclusion (plus a
+hidden-baseline review case) through MCP tools, then — depending on what
+the work leaves behind — automatically emits a copy-ready **next-step
+prompt block**: at most 12 lines of ids and an action sequence, never a
+restated report. With zero follow-ups it emits no block, just a one-line
+note.
+
+```text
+[agent-handoff] project=my-repo
+workspace=/abs/path/to/my-repo
+logical_topic_id=<uuid>
+supersedes_id=<comparison-conclusion-id>
+Actions: get_topic_context <uuid> -> address reviewer_only backlog in the latest comparison
+Scope guard: docs/ and skills/ only; no backend code
+```
+
+**2 · Open a different vendor's agent** (Codex / Cursor / Gemini), paste the
+block — or just say "review the latest handoff" / "接上次结论审一遍". It pulls
+the record, reviews it with its own independent judgment, and publishes the
+comparison; the thread automatically continues on the same logical topic.
+
+**3 · Watch it live** on the Board (http://127.0.0.1:4319): topic states,
+agent claims, review cases, supersede chains.
+
+The record is the payload; the prompt is the pointer. That one block is all
+that ever crosses a vendor boundary — no chat-log pasting, no truncation.
+The `agent-events` CLI from Quick start works the same way: say "report
+progress" / "claim this topic" and your agent invokes it for you.
 
 ## Configuration
 

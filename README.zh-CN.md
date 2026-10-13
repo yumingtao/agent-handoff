@@ -49,7 +49,8 @@ flowchart LR
 
 ## 亮点
 
-- **隐藏 baseline 的独立评审**：写方 agent 发布工作成果和一个隐藏 baseline 的评审 case；审方 agent 只凭 packet 评估被引用的代码，提交 assessment 之后才揭示 baseline——一套防锚定的 A/B 协议。
+- **隐藏 baseline 的独立评审**：写方 agent 发布工作成果和一个隐藏 baseline 的评审 case；审方 agent 只凭 packet 评估被引用的代码，  提交 assessment 之后才揭示 baseline——一套防锚定的 A/B 协议。
+- **提示词驱动，而非命令驱动**：装一次 `skills/` 包，之后任何跨 agent 意图都能触发——"让 Codex 独立审一下"、"跑个跨模型 review"、"接上次结论审一遍"。MCP 调用全部由 agent 完成，且只要还有后续事项，就会自动交给你一个可直接复制的 ≤12 行提示词块，转交给下一厂商的 agent——记录是载荷，提示词只是指针。
 - **天然跨厂商**：记录携带 `source_agent` / `model` 平台 ID；一个 Claude 会话可以交接给 Codex、Cursor、Copilot、Gemini…
 - **Topic 生命周期**：每个逻辑 topic 都带显式任务状态（`open` / `done` / `cancelled`）与完整审计轨迹；向已完成或已取消的 topic 发布新交接会自动重开，任务状态不会悄悄漂移。
 - **本地优先存储**：一切都在 `~/.agent-handoff/` 下（SQLite + JSON 兜底文件）。无云端、无网络调用。
@@ -71,12 +72,37 @@ npm install
 npm run build
 npm start            # http://127.0.0.1:4319
 
-# 3. 发布一条 agent event（可选）
+# 3. 发布一条 agent event（可选管道；日常使用是提示词驱动——见下节）
 cd ../agent-events
 node src/cli.mjs publish --project my-repo --workspace /abs/path/to/my-repo \
   --topic ISSUE-123 --agent codex --event-type task_progress \
   --payload '{"note":"investigating"}'
 ```
+
+## 日常使用：提示词，而非命令
+
+快速开始里的命令只是底层管道——装好之后你不再敲命令。日常你直接对 agent 说话，[`skills/`](skills/) 包会把它闭成环：
+
+**1 · 在一个 agent 里完成工作**，然后表达跨 agent 意图——怎么说都行：
+
+> 让 Codex 独立审一下这个解析器修复。
+
+没有魔法关键词：跨 agent 评审、独立评审、"继续上次的 handoff"都能触发。但发布保持 opt-in——仅仅做出了成果的 agent 绝不会背着你发布。触发后，agent 通过 MCP 工具发布结构化结论（以及隐藏 baseline 的评审 case），并**根据场景自动**产出可直接复制的**下一步提示词块**：至多 12 行，只含 id 与动作序列——绝不复述报告本身；若没有任何后续事项，则不出块，只以一行说明。
+
+```text
+[agent-handoff] project=my-repo
+workspace=/abs/path/to/my-repo
+logical_topic_id=<uuid>
+supersedes_id=<comparison-conclusion-id>
+Actions: get_topic_context <uuid> -> address reviewer_only backlog in the latest comparison
+Scope guard: docs/ and skills/ only; no backend code
+```
+
+**2 · 打开另一厂商的 agent**（Codex / Cursor / Gemini），粘贴该块——或直接说"接上次结论审一遍" / "review the latest handoff"。它会拉取记录、以自身独立判断完成评审并发布对比；线程自动续在同一逻辑 topic 上。
+
+**3 · 在 Board 上实时观看**（http://127.0.0.1:4319）：topic 状态、agent 认领、评审 case、supersede 链。
+
+记录是载荷，提示词只是指针。跨厂商边界流转的只有这一个块——不搬运聊天记录，不会截断。快速开始第 3 步的 agent-events CLI 同理：说一句"汇报进度" / "claim 这个 topic"，agent 会替你调用。
 
 ## 配置
 
