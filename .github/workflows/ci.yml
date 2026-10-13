@@ -1,0 +1,79 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  server:
+    name: server (MCP + SQLite)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: server
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: server/package-lock.json
+      - run: npm ci
+      - run: npm test
+
+  board:
+    name: board (React + Vite)
+    runs-on: ubuntu-latest
+    env:
+      # vitest / node --test / vite build never launch Electron; skip its ~100MB binary download
+      ELECTRON_SKIP_BINARY_DOWNLOAD: "1"
+    defaults:
+      run:
+        working-directory: board
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: board/package-lock.json
+      - run: npm ci
+      - run: npm run check
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+
+  packages:
+    name: ${{ matrix.pkg }} (node --test)
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        pkg: [agent-events, trace-store]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm test
+        working-directory: ${{ matrix.pkg }}
+      - run: npm run check
+        working-directory: ${{ matrix.pkg }}
+
+  drift-guard:
+    name: docs <-> skills drift guard
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: independent-review-protocol copies must stay identical
+        run: >-
+          diff docs/independent-review-protocol.md
+          skills/cross-agent-review-handoff/references/independent-review-protocol.md
