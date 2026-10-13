@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b1220"/>
+      <stop offset="100%" stop-color="#070c18"/>
+    </linearGradient>
+    <linearGradient id="puzzleBlue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6ba8f8"/>
+      <stop offset="100%" stop-color="#4a8ce8"/>
+    </linearGradient>
+    <linearGradient id="puzzleGreen" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4ddbab"/>
+      <stop offset="100%" stop-color="#2ec487"/>
+    </linearGradient>
+    <filter id="glow3" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect x="96" y="96" width="832" height="832" rx="180" ry="180" fill="url(#bg3)"/>
+  <rect x="256" y="256" width="512" height="256" rx="48" ry="48" fill="url(#puzzleBlue)" opacity="0.9" filter="url(#glow3)"/>
+  <rect x="256" y="512" width="512" height="256" rx="48" ry="48" fill="url(#puzzleGreen)" opacity="0.9" filter="url(#glow3)"/>
+  <circle cx="380" cy="380" r="36" fill="rgba(255,255,255,0.25)"/>
+  <circle cx="640" cy="640" r="36" fill="rgba(255,255,255,0.25)"/>
+</svg>

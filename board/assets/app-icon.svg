@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
+  <title id="title">Handoff Board</title>
+  <desc id="desc">Three agent nodes connected by colored handoff lines on a rounded board.</desc>
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a2d4a"/>
+      <stop offset="100%" stop-color="#0f1b2e"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Board base -->
+  <rect x="96" y="96" width="832" height="832" rx="180" ry="180" fill="url(#bg1)"/>
+  <rect x="140" y="140" width="744" height="744" rx="148" ry="148" fill="#132033" opacity="0.6"/>
+
+  <!-- Handoff lines (thicker for large size) -->
+  <!-- 蓝→绿 (left arc) = green -->
+  <path d="M 300 380 Q 424 500 512 624"
+        fill="none" stroke="#34d399" stroke-width="12" stroke-linecap="round"/>
+  <!-- 绿→黄 (right arc) = yellow -->
+  <path d="M 512 624 Q 600 500 724 380"
+        fill="none" stroke="#fbbf24" stroke-width="12" stroke-linecap="round"/>
+  <!-- 黄→蓝 (top arc) = blue -->
+  <path d="M 724 380 Q 512 260 300 380"
+        fill="none" stroke="#5b9cf6" stroke-width="12" stroke-linecap="round"/>
+
+  <!-- Agent node 1: Blue (flat, no gradient) -->
+  <circle cx="300" cy="380" r="72" fill="#5b9cf6"/>
+  <circle cx="300" cy="380" r="56" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="2"/>
+  <!-- Status dot: green = source from Green agent -->
+  <circle cx="335" cy="410" r="10" fill="#34d399"/>
+
+  <!-- Agent node 2: Amber/Yellow (flat, no gradient) -->
+  <circle cx="724" cy="380" r="72" fill="#fbbf24"/>
+  <circle cx="724" cy="380" r="56" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="2"/>
+  <!-- Status dot: blue = source from Blue agent -->
+  <circle cx="684" cy="360" r="10" fill="#5b9cf6"/>
+
+  <!-- Agent node 3: Green (flat, no gradient, same size) -->
+  <circle cx="512" cy="624" r="72" fill="#34d399"/>
+  <circle cx="512" cy="624" r="56" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="2"/>
+  <!-- Status dot: amber = source from Yellow agent -->
+  <circle cx="545" cy="580" r="10" fill="#fbbf24"/>
+</svg>

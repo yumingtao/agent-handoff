@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Handoff Board — Icon Design Preview</title>
+<style>
+  :root {
+    --bg: #0b1220;
+    --surface: #152238;
+    --surface-2: #101c2e;
+    --border: rgba(120, 148, 188, 0.15);
+    --text: #e4ecf6;
+    --text-dim: #9db0c8;
+    --blue: #5b9cf6;
+    --green: #34d399;
+    --amber: #fbbf24;
+    --purple: #a78bfa;
+    --red: #f87171;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 40px 24px;
+  }
+  .header {
+    max-width: 1200px;
+    margin: 0 auto 40px;
+  }
+  h1 {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  .subtitle {
+    color: var(--text-dim);
+    margin-top: 6px;
+    font-size: 15px;
+  }
+
+  .designs {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .design {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .design-name {
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .design-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    text-align: center;
+    line-height: 1.5;
+    min-height: 40px;
+  }
+
+  .preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    width: 100%;
+  }
+
+  .preview-label {
+    font-size: 11px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  svg { display: block; }
+
+  .sizes {
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .size-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .size-label {
+    font-size: 10px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  /* Dock simulation */
+  .dock {
+    background: linear-gradient(180deg, #1a2d4a 0%, #101c2e 100%);
+    border-radius: 14px;
+    padding: 16px 20px;
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    align-items: flex-end;
+    width: 100%;
+    min-height: 72px;
+  }
+
+  .dock-icon {
+    width: 48px;
+    height: 48px;
+    transition: transform 0.2s;
+  }
+
+  .dock-icon:hover {
+    transform: scale(1.2) translateY(-8px);
+  }
+
+  .dock-divider {
+    width: 1px;
+    height: 40px;
+    background: rgba(255,255,255,0.1);
+    margin: 0 4px;
+  }
+
+  .palette {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+  }
+
+  .swatch {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    background: var(--accent-blue-dim, rgba(91,156,246,0.12));
+    color: var(--blue);
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+
+  @media (max-width: 900px) {
+    .designs { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Handoff Board — Icon Design</h1>
+  <p class="subtitle">Three directions for the Electron desktop app icon. Pick one to ship.</p>
+</div>
+
+<div class="designs">
+
+  <!-- DESIGN 1: Glow + Gradient (ORIGINAL, backed up) -->
+  <div class="design">
+    <div class="design-name">① Glow + Gradient <span class="badge">Original</span></div>
+    <div class="design-desc">Gradient fills + glow filter — saved as app-icon-glow-gradient.svg</div>
+
+    <div class="preview">
+      <div class="preview-label">1024px</div>
+      <svg width="256" height="256" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#1a2d4a"/>
+            <stop offset="100%" stop-color="#0f1b2e"/>
+          </linearGradient>
+          <linearGradient id="nodeBlue" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#6ba8f8"/>
+            <stop offset="100%" stop-color="#5b9cf6"/>
+          </linearGradient>
+          <linearGradient id="nodeGreen" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#4ddbab"/>
+            <stop offset="100%" stop-color="#34d399"/>
+          </linearGradient>
+          <linearGradient id="nodeAmber" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#ffc966"/>
+            <stop offset="100%" stop-color="#fbbf24"/>
+          </linearGradient>
+          <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#a78bfa"/>
+            <stop offset="100%" stop-color="#5b9cf6"/>
+          </linearGradient>
+          <filter id="glow1" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="12" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        <!-- Board base -->
+        <rect x="96" y="96" width="832" height="832" rx="180" ry="180" fill="url(#bg1)"/>
+        <rect x="140" y="140" width="744" height="744" rx="148" ry="148" fill="#132033" opacity="0.6"/>
+
+        <!-- Handoff line (original gradient) -->
+        <path d="M 300 380 Q 512 260 724 380 Q 600 500 512 624 Q 424 500 300 380"
+              fill="none" stroke="url(#lineGrad)" stroke-width="8" stroke-linecap="round" opacity="0.8" filter="url(#glow1)"/>
+
+        <!-- Agent node 1: Blue -->
+        <circle cx="300" cy="380" r="72" fill="url(#nodeBlue)" filter="url(#glow1)"/>
+        <circle cx="300" cy="380" r="56" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+        <circle cx="335" cy="410" r="10" fill="#34d399"/>
+
+        <!-- Agent node 2: Amber/Yellow -->
+        <circle cx="724" cy="380" r="72" fill="url(#nodeAmber)" filter="url(#glow1)"/>
+        <circle cx="724" cy="380" r="56" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+        <circle cx="684" cy="360" r="10" fill="#5b9cf6"/>
+
+        <!-- Agent node 3: Green -->
+        <circle cx="512" cy="624" r="72" fill="url(#nodeGreen)" filter="url(#glow1)"/>
+        <circle cx="512" cy="624" r="56" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="2"/>
+        <circle cx="545" cy="580" r="10" fill="#fbbf24"/>
+
+      </svg>
+    </div>
+
+    <div class="sizes">
+      <div class="size-item"><div class="size-label">32px</div>
+        <svg width="32" height="32" viewBox="0 0 1024 1024"><rect x="96" y="96" width="832" height="832" rx="180" fill="#1a2d4a"/><path d="M 300 380 Q 424 500 512 624" fill="none" stroke="#34d399" stroke-width="8" stroke-linecap="round" opacity="0.85"/><path d="M 512 624 Q 600 500 724 380" fill="none" stroke="#fbbf24" stroke-width="8" stroke-linecap="round" opacity="0.85"/><path d="M 724 380 Q 512 260 300 380" fill="none" stroke="#5b9cf6" stroke-width="8" stroke-linecap="round" opacity="0.85"/><circle cx="300" cy="380" r="72" fill="#5b9cf6"/><circle cx="344" cy="408" r="10" fill="#34d399"/><circle cx="724" cy="380" r="72" fill="#fbbf24"/><circle cx="694" cy="360" r="10" fill="#5b9cf6"/><circle cx="512" cy="624" r="72" fill="#34d399"/><circle cx="540" cy="582" r="12" fill="#fbbf24"/></svg>
+      </div>
+      <div class="size-item"><div class="size-label">48px</div>
+        <svg width="48" height="48" viewBox="0 0 1024 1024"><rect x="96" y="96" width="832" height="832" rx="180" fill="#1a2d4a"/><path d="M 300 380 Q 424 500 512 624" fill="none" stroke="#34d399" stroke-width="8" stroke-linecap="round" opacity="0.85"/><path d="M 512 624 Q 600 500 724 380" fill="none" stroke="#fbbf24" stroke-width="8" stroke-linecap="round" opacity="0.85"/><path d="M 724 380 Q 512 260 300 380" fill="none" stroke="#5b9cf6" stroke-width="8" stroke-linecap="round" opacity="0.85"/><circle cx="300" cy="380" r="72" fill="#5b9cf6"/><circle cx="344" cy="408" r="10" fill="#34d399"/><circle cx="724" cy="380" r="72" fill="#fbbf24"/><circle cx="694" cy="360" r="10" fill="#5b9cf6"/><circle cx="512" cy="624" r="72" fill="#34d399"/><circle cx="540" cy="582" r="12" fill="#fbbf24"/></svg>
+      </div>
+      <div class="size-item"><div class="size-label">64px</div>
+        <svg width="64" height="64" viewBox="0 0 1024 1024"><rect x="96" y="96" width="832" height="832" rx="180" fill="#1a2d4a"/><path d="M 300 380 Q 424 500 512 624" fill="none" stroke="#34d399" stroke-width="8" stroke-linecap="round" opacity="0.85"/><path d="M 512 624 Q 600 500 724 380" fill="none" stroke="#fbbf24" stroke-width="8" stroke-linecap="round" opacity="0.85"/><path d="M 724 380 Q 512 260 300 380" fill="none" stroke="#5b9cf6" stroke-width="8" stroke-linecap="round" opacity="0.85"/><circle cx="300" cy="380" r="72" fill="#5b9cf6"/><circle cx="344" cy="408" r="10" fill="#34d399"/><circle cx="724" cy="380" r="72" fill="#fbbf24"/><circle cx="694" cy="360" r="10" fill="#5b9cf6"/><circle cx="512" cy="624" r="72" fill="#34d399"/><circle cx="540" cy="582" r="12" fill="#fbbf24"/></svg>
+      </div>
+    </div>
+
+    <div class="palette">
+      <div class="swatch" style="background:#1a2d4a"></div>
+      <div class="swatch" style="background:#5b9cf6"></div>
+      <div class="swatch" style="background:#34d399"></div>
+      <div class="swatch" style="background:#fbbf24"></div>
+      <div class="swatch" style="background:#a78bfa"></div>
+    </div>
+  </div>
+
+  <!-- DESIGN 1b: Flat Tray Style (side-by-side comparison) -->
+  <div class="design" style="grid-column: span 1;">
+    <div class="design-name">①b Flat Tray Style</div>
+    <div class="design-desc">Flat fills, no glow — same style as tray icon, scaled up for app icon</div>
+
+    <div class="preview">
+      <div class="preview-label">1024px</div>
+      <svg width="256" height="256" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="bg1b" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#1a2d4a"/>
+            <stop offset="100%" stop-color="#0f1b2e"/>
+          </linearGradient>
+        </defs>
+        <rect x="96" y="96" width="832" height="832" rx="180" ry="180" fill="url(#bg1b)"/>
+        <rect x="140" y="140" width="744" height="744" rx="148" ry="148" fill="#132033" opacity="0.6"/>
+        <path d="M 300 380 Q 424 500 512 624" fill="none" stroke="#34d399" stroke-width="12" stroke-linecap="round"/>
+        <path d="M 512 624 Q 600 500 724 380" fill="none" stroke="#fbbf24" stroke-width="12" stroke-linecap="round"/>
+        <path d="M 724 380 Q 512 260 300 380" fill="none" stroke="#5b9cf6" stroke-width="12" stroke-linecap="round"/>
+        <circle cx="300" cy="380" r="72" fill="#5b9cf6"/>
+        <circle cx="300" cy="380" r="56" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="2"/>
+        <circle cx="335" cy="410" r="10" fill="#34d399"/>
+        <circle cx="724" cy="380" r="72" fill="#fbbf24"/>
+        <circle cx="724" cy="380" r="56" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="2"/>
+        <circle cx="684" cy="360" r="10" fill="#5b9cf6"/>
+        <circle cx="512" cy="624" r="72" fill="#34d399"/>
+        <circle cx="512" cy="624" r="56" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="2"/>
+        <circle cx="545" cy="580" r="10" fill="#fbbf24"/>
+      </svg>
+    </div>
+
+    <div class="sizes">
+      <div class="size-item"><div class="size-label">32px</div>
+        <svg width="32" height="32" viewBox="0 0 1024 1024"><rect x="96" y="96" width="832" height="832" rx="180" fill="#1a2d4a"/><path d="M 300 380 Q 424 500 512 624" fill="none" stroke="#34d399" stroke-width="12" stroke-linecap="round"/><path d="M 512 624 Q 600 500 724 380" fill="none" stroke="#fbbf24" stroke-width="12" stroke-linecap="round"/><path d="M 724 380 Q 512 260 300 380" fill="none" stroke="#5b9cf6" stroke-width="12" stroke-linecap="round"/><circle cx="300" cy="380" r="72" fill="#5b9cf6"/><circle cx="344" cy="408" r="10" fill="#34d399"/><circle cx="724" cy="380" r="72" fill="#fbbf24"/><circle cx="694" cy="360" r="10" fill="#5b9cf6"/><circle cx="512" cy="624" r="72" fill="#34d399"/><circle cx="540" cy="582" r="12" fill="#fbbf24"/></svg>
+      </div>
+      <div class="size-item"><div class="size-label">48px</div>
+        <svg width="48" height="48" viewBox="0 0 1024 1024"><rect x="96" y="96" width="832" height="832" rx="180" fill="#1a2d4a"/><path d="M 300 380 Q 424 500 512 624" fill="none" stroke="#34d399" stroke-width="12" stroke-linecap="round"/><path d="M 512 624 Q 600 500 724 380" fill="none" stroke="#fbbf24" stroke-width="12" stroke-linecap="round"/><path d="M 724 380 Q 512 260 300 380" fill="none" stroke="#5b9cf6" stroke-width="12" stroke-linecap="round"/><circle cx="300" cy="380" r="72" fill="#5b9cf6"/><circle cx="344" cy="408" r="10" fill="#34d399"/><circle cx="724" cy="380" r="72" fill="#fbbf24"/><circle cx="694" cy="360" r="10" fill="#5b9cf6"/><circle cx="512" cy="624" r="72" fill="#34d399"/><circle cx="540" cy="582" r="12" fill="#fbbf24"/></svg>
+      </div>
+      <div class="size-item"><div class="size-label">64px</div>
+        <svg width="64" height="64" viewBox="0 0 1024 1024"><rect x="96" y="96" width="832" height="832" rx="180" fill="#1a2d4a"/><path d="M 300 380 Q 424 500 512 624" fill="none" stroke="#34d399" stroke-width="12" stroke-linecap="round"/><path d="M 512 624 Q 600 500 724 380" fill="none" stroke="#fbbf24" stroke-width="12" stroke-linecap="round"/><path d="M 724 380 Q 512 260 300 380" fill="none" stroke="#5b9cf6" stroke-width="12" stroke-linecap="round"/><circle cx="300" cy="380" r="72" fill="#5b9cf6"/><circle cx="344" cy="408" r="10" fill="#34d399"/><circle cx="724" cy="380" r="72" fill="#fbbf24"/><circle cx="694" cy="360" r="10" fill="#5b9cf6"/><circle cx="512" cy="624" r="72" fill="#34d399"/><circle cx="540" cy="582" r="12" fill="#fbbf24"/></svg>
+      </div>
+    </div>
+
+    <div class="palette">
+      <div class="swatch" style="background:#1a2d4a"></div>
+      <div class="swatch" style="background:#5b9cf6"></div>
+      <div class="swatch" style="background:#34d399"></div>
+      <div class="swatch" style="background:#fbbf24"></div>
+    </div>
+  </div>
+
+  <!-- DESIGN 2: Board Pulse -->
+  <div class="design">
+    <div class="design-name">② Board Pulse</div>
+    <div class="design-desc">Waveform on a board — the core Pulse visualization</div>
+
+    <div class="preview">
+      <div class="preview-label">1024px</div>
+      <svg width="256" height="256" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#101c2e"/>
+            <stop offset="100%" stop-color="#070c18"/>
+          </linearGradient>
+          <linearGradient id="waveGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#5b9cf6"/>
+            <stop offset="50%" stop-color="#a78bfa"/>
+            <stop offset="100%" stop-color="#34d399"/>
+          </linearGradient>
+          <filter id="glow2" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="16" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        <!-- Board base -->
+        <rect x="96" y="96" width="832" height="832" rx="196" ry="196" fill="url(#bg2)"/>
+
+        <!-- Decorative grid lines (top/bottom borders) -->
+        <line x1="180" y1="280" x2="844" y2="280" stroke="rgba(120,148,188,0.12)" stroke-width="2"/>
+        <line x1="180" y1="744" x2="844" y2="744" stroke="rgba(120,148,188,0.12)" stroke-width="2"/>
+
+        <!-- Board label line -->
+        <line x1="180" y1="400" x2="380" y2="400" stroke="rgba(120,148,188,0.2)" stroke-width="4" stroke-linecap="round"/>
+
+        <!-- Waveform: the Pulse -->
+        <path d="M 180 560
+                 L 260 560
+                 L 300 420
+                 L 340 700
+                 L 380 380
+                 L 420 740
+                 L 460 440
+                 L 500 680
+                 L 540 400
+                 L 580 720
+                 L 620 460
+                 L 660 660
+                 L 700 420
+                 L 740 700
+                 L 780 520
+                 L 844 520"
+              fill="none" stroke="url(#waveGrad)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow2)"/>
+
+        <!-- Active pulse indicator -->
+        <circle cx="512" cy="560" r="16" fill="#34d399" filter="url(#glow2)"/>
+
+        <!-- Board corners (L-shapes suggesting frame) -->
+        <path d="M 200 220 L 200 280 L 260 280" fill="none" stroke="#5b9cf6" stroke-width="6" stroke-linecap="round" opacity="0.6"/>
+        <path d="M 824 220 L 824 280 L 764 280" fill="none" stroke="#5b9cf6" stroke-width="6" stroke-linecap="round" opacity="0.6"/>
+        <path d="M 200 804 L 200 744 L 260 744" fill="none" stroke="#5b9cf6" stroke-width="6" stroke-linecap="round" opacity="0.6"/>
+        <path d="M 824 804 L 824 744 L 764 744" fill="none" stroke="#5b9cf6" stroke-width="6" stroke-linecap="round" opacity="0.6"/>
+      </svg>
+    </div>
+
+    <div class="sizes">
+      <div class="size-item"><div class="size-label">32px</div>
+        <svg width="32" height="32" viewBox="0 0 1024 1024"><rect x="96" y="96" width="832" height="832" rx="196" fill="#101c2e"/><path d="M 220 560 L 300 420 L 380 680 L 460 440 L 540 660 L 620 420 L 700 680 L 780 520" fill="none" stroke="#5b9cf6" stroke-width="40" stroke-linecap="round"/></svg>
+      </div>
+      <div class="size-item"><div class="size-label">48px</div>
+        <svg width="48" height="48" viewBox="0 0 1024 1024"><rect x="96" y="96" width="832" height="832" rx="196" fill="#101c2e"/><path d="M 220 560 L 300 420 L 380 680 L 460 440 L 540 660 L 620 420 L 700 680 L 780 520" fill="none" stroke="#5b9cf6" stroke-width="40" stroke-linecap="round"/></svg>
+      </div>
+      <div class="size-item"><div class="size-label">64px</div>
+        <svg width="64" height="64" viewBox="0 0 1024 1024"><rect x="96" y="96" width="832" height="832" rx="196" fill="#101c2e"/><path d="M 220 560 L 300 420 L 380 680 L 460 440 L 540 660 L 620 420 L 700 680 L 780 520" fill="none" stroke="#5b9cf6" stroke-width="40" stroke-linecap="round"/></svg>
+      </div>
+    </div>
+
+    <div class="palette">
+      <div class="swatch" style="background:#101c2e"></div>
+      <div class="swatch" style="background:#5b9cf6"></div>
+      <div class="swatch" style="background:#a78bfa"></div>
+      <div class="swatch" style="background:#34d399"></div>
+    </div>
+  </div>
+
+  <!-- DESIGN 3: Puzzle Pieces -->
+  <div class="design">
+    <div class="design-name">③ Multi-Agent Puzzle</div>
+    <div class="design-desc">3 interlocking blocks — agents assembling the board together</div>
+
+    <div class="preview">
+      <div class="preview-label">1024px</div>
+      <svg width="256" height="256" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#0b1220"/>
+            <stop offset="100%" stop-color="#070c18"/>
+          </linearGradient>
+          <linearGradient id="puzzleBlue" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#6ba8f8"/>
+            <stop offset="100%" stop-color="#4a8ce8"/>
+          </linearGradient>
+          <linearGradient id="puzzleGreen" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#4ddbab"/>
+            <stop offset="100%" stop-color="#2ec487"/>
+          </linearGradient>
+          <linearGradient id="puzzleAmber" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#ffc966"/>
+            <stop offset="100%" stop-color="#e6a820"/>
+          </linearGradient>
+          <filter id="glow3" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="10" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        <!-- Rounded square bg -->
+        <rect x="96" y="96" width="832" height="832" rx="180" ry="180" fill="url(#bg3)"/>
+
+        <!-- Puzzle piece 1 (blue, top-left) -->
+        <path d="
+          M 220 220
+          L 440 220
+          L 440 300
+          C 440 340, 480 360, 500 360
+          C 520 360, 560 340, 560 300
+          L 560 220
+          L 780 220
+          L 780 440
+          L 700 440
+          C 660 440, 640 480, 640 500
+          C 640 520, 660 560, 700 560
+          L 780 560
+          L 780 780
+          L 220 780
+          L 220 560
+          L 300 560
+          C 340 560, 360 520, 360 500
+          C 360 480, 340 440, 300 440
+          L 220 440
+          Z
+        " fill="url(#puzzleBlue)" opacity="0.9" filter="url(#glow3)"/>
+
+        <!-- Puzzle piece 2 (green, cut into piece 1) -->
+        <path d="
+          M 440 560
+          L 640 560
+          L 640 640
+          C 640 680, 600 700, 580 700
+          C 560 700, 520 680, 520 640
+          L 520 560
+          L 300 560
+          L 300 640
+          C 300 680, 260 700, 240 700
+          C 220 700, 180 680, 180 640
+          L 180 560
+          L 180 340
+          L 260 340
+          C 300 340, 320 300, 320 280
+          C 320 260, 300 220, 260 220
+          L 180 220
+          L 180 180
+          L 640 180
+          L 640 260
+          C 640 300, 600 320, 580 320
+          C 560 320, 520 300, 520 260
+          L 520 180
+          L 640 180
+          L 640 560
+          Z
+        " fill="url(#puzzleGreen)" opacity="0.9" filter="url(#glow3)"/>
+
+        <!-- Accent highlight on pieces -->
+        <circle cx="380" cy="380" r="36" fill="rgba(255,255,255,0.25)"/>
+        <circle cx="560" cy="620" r="36" fill="rgba(255,255,255,0.25)"/>
+      </svg>
+    </div>
+
+    <div class="sizes">
+      <div class="size-item"><div class="size-label">32px</div>
+        <svg width="32" height="32" viewBox="0 0 1024 1024"><rect x="96" y="96" width="832" height="832" rx="180" fill="#0b1220"/><rect x="256" y="256" width="512" height="256" rx="40" fill="#5b9cf6" opacity="0.9"/><rect x="256" y="512" width="512" height="256" rx="40" fill="#34d399" opacity="0.9"/></svg>
+      </div>
+      <div class="size-item"><div class="size-label">48px</div>
+        <svg width="48" height="48" viewBox="0 0 1024 1024"><rect x="96" y="96" width="832" height="832" rx="180" fill="#0b1220"/><rect x="256" y="256" width="512" height="256" rx="40" fill="#5b9cf6" opacity="0.9"/><rect x="256" y="512" width="512" height="256" rx="40" fill="#34d399" opacity="0.9"/></svg>
+      </div>
+      <div class="size-item"><div class="size-label">64px</div>
+        <svg width="64" height="64" viewBox="0 0 1024 1024"><rect x="96" y="96" width="832" height="832" rx="180" fill="#0b1220"/><rect x="256" y="256" width="512" height="256" rx="40" fill="#5b9cf6" opacity="0.9"/><rect x="256" y="512" width="512" height="256" rx="40" fill="#34d399" opacity="0.9"/></svg>
+      </div>
+    </div>
+
+    <div class="palette">
+      <div class="swatch" style="background:#0b1220"></div>
+      <div class="swatch" style="background:#5b9cf6"></div>
+      <div class="swatch" style="background:#34d399"></div>
+      <div class="swatch" style="background:#fbbf24"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Dock preview for all 3 designs -->
+<div style="max-width:1200px; margin: 40px auto 0;">
+  <div class="preview-label" style="margin-bottom: 12px;">Dock Simulation (hover to enlarge)</div>
+  <div class="dock">
+    <div class="dock-item">
+      <div class="size-label" style="text-align:center; margin-bottom:6px;">①</div>
+      <svg class="dock-icon" viewBox="0 0 1024 1024">
+        <rect x="96" y="96" width="832" height="832" rx="180" fill="#1a2d4a"/><path d="M 300 380 Q 424 500 512 624" fill="none" stroke="#34d399" stroke-width="8" stroke-linecap="round" opacity="0.85"/><path d="M 512 624 Q 600 500 724 380" fill="none" stroke="#fbbf24" stroke-width="8" stroke-linecap="round" opacity="0.85"/><path d="M 724 380 Q 512 260 300 380" fill="none" stroke="#5b9cf6" stroke-width="8" stroke-linecap="round" opacity="0.85"/>
+        <circle cx="300" cy="380" r="72" fill="#5b9cf6"/>
+        <circle cx="344" cy="408" r="10" fill="#34d399"/>
+        <circle cx="724" cy="380" r="72" fill="#fbbf24"/>
+        <circle cx="694" cy="360" r="10" fill="#5b9cf6"/>
+        <circle cx="512" cy="624" r="72" fill="#34d399"/>
+        <circle cx="540" cy="582" r="12" fill="#fbbf24"/>
+      </svg>
+    </div>
+    <div class="dock-item">
+      <div class="size-label" style="text-align:center; margin-bottom:6px;">②</div>
+      <svg class="dock-icon" viewBox="0 0 1024 1024">
+        <rect x="96" y="96" width="832" height="832" rx="196" fill="#101c2e"/>
+        <path d="M 180 560 L 300 420 L 380 680 L 460 440 L 540 660 L 620 420 L 700 680 L 844 520" fill="none" stroke="#5b9cf6" stroke-width="40" stroke-linecap="round"/>
+        <circle cx="512" cy="560" r="20" fill="#34d399"/>
+      </svg>
+    </div>
+    <div class="dock-item">
+      <div class="size-label" style="text-align:center; margin-bottom:6px;">③</div>
+      <svg class="dock-icon" viewBox="0 0 1024 1024">
+        <rect x="96" y="96" width="832" height="832" rx="180" fill="#0b1220"/>
+        <rect x="256" y="256" width="512" height="256" rx="40" fill="#5b9cf6" opacity="0.9"/>
+        <rect x="256" y="512" width="512" height="256" rx="40" fill="#34d399" opacity="0.9"/>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- Comparison notes -->
+<div style="max-width:1200px; margin: 40px auto 0; display:grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+  <div style="background:var(--surface); padding:20px; border-radius:12px; border:1px solid var(--border);">
+    <div style="font-weight:600; margin-bottom:8px;">① Hand-off Abstract</div>
+    <div style="color:var(--text-dim); font-size:13px; line-height:1.6;">
+      <strong>Best for:</strong> Brand recognition. 3 connected nodes = agent handoff. Very clear at 32px+.
+    </div>
+  </div>
+  <div style="background:var(--surface); padding:20px; border-radius:12px; border:1px solid var(--border);">
+    <div style="font-weight:600; margin-bottom:8px;">② Board Pulse</div>
+    <div style="color:var(--text-dim); font-size:13px; line-height:1.6;">
+      <strong>Best for:</strong> Technical/monitoring feel. Waveform = live pulse. Slightly less obvious what it is.
+    </div>
+  </div>
+  <div style="background:var(--surface); padding:20px; border-radius:12px; border:1px solid var(--border);">
+    <div style="font-weight:600; margin-bottom:8px;">③ Puzzle Pieces</div>
+    <div style="color:var(--text-dim); font-size:13px; line-height:1.6;">
+      <strong>Best for:</strong> Colorful & playful. 3 agents assembling. Simple shape scales well at small sizes.
+    </div>
+  </div>
+</div>
+
+<script>
+  // Export individual icons as SVG files
+  document.querySelectorAll('svg').forEach((svg, i) => {
+    // Make each SVG downloadable
+    const btn = document.createElement('button');
+    btn.textContent = '↓ SVG';
+    btn.style.cssText = 'position:absolute;bottom:8px;right:8px;background:rgba(91,156,246,0.15);color:#5b9cf6;border:1px solid rgba(91,156,246,0.3);padding:4px 10px;border-radius:6px;font-size:11px;cursor:pointer;opacity:0;transition:opacity 0.2s;';
+    btn.onclick = () => {
+      const blob = new Blob([svg.outerHTML], {type:'image/svg+xml'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `handoff-icon-${i+1}.svg`;
+      a.click();
+      URL.revokeObjectURL(url);
+    };
+    svg.parentElement.style.position = 'relative';
+    svg.parentElement.appendChild(btn);
+    svg.parentElement.addEventListener('mouseenter', () => btn.style.opacity = 1);
+    svg.parentElement.addEventListener('mouseleave', () => btn.style.opacity = 0);
+  });
+</script>
+
+</body>
+</html>

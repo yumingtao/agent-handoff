@@ -1,0 +1,14 @@
+{
+  "name": "agent-events",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Local process-state event stream for agent coordination.",
+  "scripts": {
+    "check": "node --check src/store.mjs && node --check src/cli.mjs",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=22.5"
+  }
+}

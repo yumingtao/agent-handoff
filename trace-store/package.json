@@ -1,0 +1,14 @@
+{
+  "name": "trace-store",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Local SQLite workflow, agent, tool, policy, and human-gate trace store.",
+  "scripts": {
+    "test": "node --test",
+    "check": "node --check src/trace-store.mjs",
+    "metrics": "node src/cli.mjs metrics",
+    "dashboard": "node src/cli.mjs dashboard"
+  },
+  "engines": { "node": ">=22" }
+}

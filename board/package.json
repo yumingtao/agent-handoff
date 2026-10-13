@@ -1,0 +1,105 @@
+{
+  "name": "agent-handoff-board",
+  "version": "0.1.1",
+  "private": true,
+  "type": "module",
+  "description": "Local web board for agent handoff conclusions and trace activity.",
+  "main": "electron/main.js",
+  "scripts": {
+    "start": "node src/server.mjs",
+    "dev": "npx vite",
+    "build": "npx vite build",
+    "build:server": "node scripts/bundle-server.mjs",
+    "preview": "npx vite preview",
+    "generate:icons": "node scripts/generate-icons.mjs",
+    "electron:dev": "VITE_DEV=1 node node_modules/electron/cli.js .",
+    "electron:build": "npm run build && npm run build:server && node node_modules/electron/cli.js .",
+    "electron:pack": "npm run build && npm run build:server && electron-builder --dir",
+    "electron:dist": "npm run build && npm run build:server && electron-builder",
+    "test:electron": "node --test electron/*.test.mjs",
+    "check": "node --check src/server.mjs && node --check src/handoff-store.mjs && node --check src/trace-store-view.mjs && node --check src/state.mjs && node --check src/topic-aliases.mjs && node --check ../shared/topic-canonicalization/index.mjs && node --check ../shared/topic-context/index.mjs",
+    "typecheck": "npx tsc --noEmit",
+    "test": "vitest run && npm run test:node",
+    "test:node": "node --test test/handoff-store.test.mjs test/state.test.mjs test/topic-aliases.test.mjs test/trace-store-view.test.mjs",
+    "test:watch": "vitest",
+    "test:e2e": "node --test test/e2e.test.mjs"
+  },
+  "engines": {
+    "node": ">=22.5"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.80.0",
+    "@xyflow/react": "^12.11.1",
+    "electron-updater": "^6.8.9",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-router-dom": "^7.18.2"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^16.3.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@vitejs/plugin-react": "^4.5.0",
+    "electron": "^42.11.2",
+    "electron-builder": "^26.15.3",
+    "esbuild": "^0.28.2",
+    "jsdom": "^29.1.1",
+    "sharp": "^0.35.4",
+    "typescript": "^5.8.0",
+    "vite": "^6.4.0",
+    "vitest": "^5.0.0"
+  },
+  "overrides": {
+    "js-yaml": "^4.3.2"
+  },
+  "build": {
+    "asar": true,
+    "appId": "com.agent-handoff.board",
+    "productName": "Handoff Board",
+    "icon": "assets/app-icon.png",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/main.js",
+      "electron/preload.js",
+      "electron/*.mjs",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "dist",
+        "to": "dist"
+      },
+      {
+        "from": "electron/server.mjs",
+        "to": "server/handoff-board-server.mjs"
+      },
+      {
+        "from": "assets/tray-icon.png",
+        "to": "tray/tray-icon.png"
+      }
+    ],
+    "mac": {
+      "icon": "assets/app-icon.icns",
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "category": "public.app-category.productivity"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "zip"
+      ]
+    }
+  }
+}

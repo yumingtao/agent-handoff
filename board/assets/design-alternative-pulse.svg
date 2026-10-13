@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#101c2e"/>
+      <stop offset="100%" stop-color="#070c18"/>
+    </linearGradient>
+    <linearGradient id="waveGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#5b9cf6"/>
+      <stop offset="50%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#34d399"/>
+    </linearGradient>
+    <filter id="glow2" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect x="96" y="96" width="832" height="832" rx="196" ry="196" fill="url(#bg2)"/>
+  <line x1="180" y1="280" x2="844" y2="280" stroke="rgba(120,148,188,0.12)" stroke-width="2"/>
+  <line x1="180" y1="744" x2="844" y2="744" stroke="rgba(120,148,188,0.12)" stroke-width="2"/>
+  <line x1="180" y1="400" x2="380" y2="400" stroke="rgba(120,148,188,0.2)" stroke-width="4" stroke-linecap="round"/>
+  <path d="M 180 560 L 260 560 L 300 420 L 340 700 L 380 380 L 420 740 L 460 440 L 500 680 L 540 400 L 580 720 L 620 460 L 660 660 L 700 420 L 740 700 L 780 520 L 844 520"
+        fill="none" stroke="url(#waveGrad)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow2)"/>
+  <circle cx="512" cy="560" r="16" fill="#34d399" filter="url(#glow2)"/>
+  <path d="M 200 220 L 200 280 L 260 280" fill="none" stroke="#5b9cf6" stroke-width="6" stroke-linecap="round" opacity="0.6"/>
+  <path d="M 824 220 L 824 280 L 764 280" fill="none" stroke="#5b9cf6" stroke-width="6" stroke-linecap="round" opacity="0.6"/>
+  <path d="M 200 804 L 200 744 L 260 744" fill="none" stroke="#5b9cf6" stroke-width="6" stroke-linecap="round" opacity="0.6"/>
+  <path d="M 824 804 L 824 744 L 764 744" fill="none" stroke="#5b9cf6" stroke-width="6" stroke-linecap="round" opacity="0.6"/>
+</svg>
