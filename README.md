@@ -55,7 +55,7 @@ still apply.
 | Package | What it is |
 |---|---|
 | `server/` | MCP server (TypeScript): conclusions, logical topics, hidden-baseline independent review cases, secret scanning, idempotent writes, supersede chains |
-| `board/` | Local web board (React + Node): topic/agent states, SSE live updates, ops actions, optional Electron tray app |
+| `board/` | Local web board (React + Node): topic/agent states, SSE live updates, guided workflow designer (human-gated, no auto-execution), ops actions, optional Electron tray app |
 | `agent-events/` | Tiny SQLite event stream for process state (claim / progress / block / release / heartbeat) |
 | `trace-store/` | Local SQLite trace store with metrics CLI and dashboard |
 | `shared/` | Canonical topic / workspace normalization used by both server and board |

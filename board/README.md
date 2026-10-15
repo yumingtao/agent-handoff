@@ -14,6 +14,12 @@ re-enters the loop until nothing remains.
 - derived agent states using handoff publish history and local trace activity
 - separate `agent_events` protocol for claim/progress/block/release/heartbeat
 - local ops for health, backup, and cleanup preview
+- Workflow designer: compose agent skills into a drag-and-drop graph, then
+  **Deploy** turns it into a guided step checklist (CLI or manual, per step)
+
+Deploy does not execute anything: it orders the steps and you advance them —
+the board stays orchestration-free by design, matching the frozen boundary in
+`docs/handoff-board.md`.
 
 Screenshots (isolated demo data):
 

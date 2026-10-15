@@ -40,7 +40,7 @@ flowchart LR
 | 包 | 说明 |
 |---|---|
 | `server/` | MCP server（TypeScript）：结论、逻辑 topic、隐藏 baseline 的独立评审 case、密钥扫描、幂等写入、supersede 链 |
-| `board/` | 本地 Web 面板（React + Node）：topic/agent 状态、SSE 实时更新、运维操作、可选 Electron 托盘应用 |
+| `board/` | 本地 Web 面板（React + Node）：topic/agent 状态、SSE 实时更新、引导式 Workflow 设计器（人工推进，不自动执行）、运维操作、可选 Electron 托盘应用 |
 | `agent-events/` | 轻量 SQLite 事件流，记录进程状态（claim / progress / block / release / heartbeat） |
 | `trace-store/` | 本地 SQLite trace 存储，带指标 CLI 与仪表盘 |
 | `shared/` | server 与 board 共用的 topic / workspace 归一化逻辑 |
