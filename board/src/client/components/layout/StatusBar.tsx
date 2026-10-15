@@ -24,7 +24,7 @@ export default function StatusBar({ interval, lastRefreshedAt }: StatusBarProps)
       </div>
       <div className="status-bar-right">
         <span className="status-item">
-          <span className="status-label">Handoff Board</span>
+          <span className="status-label">Loop Engineering Board</span>
           <span className="status-value status-version">v0.2.0</span>
         </span>
         <span className="status-sep" aria-hidden="true">·</span>

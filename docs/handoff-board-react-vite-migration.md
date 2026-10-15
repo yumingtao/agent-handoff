@@ -1,4 +1,4 @@
-# Handoff Board: React/Vite 迁移方案
+# Loop Engineering Board: React/Vite 迁移方案
 
 ## 1. 目标与约束
 

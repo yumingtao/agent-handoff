@@ -2,6 +2,10 @@
 
 Local web board for loop engineering with `agent-handoff` conclusions, trace overlay, and agent events.
 
+The loop it watches: a problem is posed → an agent solves it → a different
+agent independently reviews it → the conclusion persists → any backlog
+re-enters the loop until nothing remains.
+
 ## What it shows
 
 - grouped topics by `project + workspace + topic`

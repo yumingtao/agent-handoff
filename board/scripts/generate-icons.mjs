@@ -57,7 +57,7 @@ async function renderPng(svgBuffer, size, outPath) {
 }
 
 async function main() {
-  console.log('🎨 Handoff Board Icon Generator\n');
+  console.log('🎨 Loop Engineering Board Icon Generator\n');
 
   // 1. Read source
   if (!fs.existsSync(SOURCE_SVG)) {
@@ -105,7 +105,7 @@ async function main() {
 
   // 6. Generate tray icon (simplified 18×18)
   console.log('\n🔧 Generating tray icon (simplified)...');
-  const traySvg = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" role="img" aria-label="Handoff Board">
+  const traySvg = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" role="img" aria-label="Loop Engineering Board">
   <circle cx="5.5" cy="7" r="1.8" fill="#5b9cf6"/>
   <circle cx="12.5" cy="7" r="1.8" fill="#fbbf24"/>
   <circle cx="9" cy="12.5" r="1.8" fill="#34d399"/>

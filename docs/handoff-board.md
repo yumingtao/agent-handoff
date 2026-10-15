@@ -2,7 +2,9 @@
 
 ## Purpose
 
-`board` is the local operational board for loop engineering work.
+`board` is the local operational board for loop engineering work — it watches
+the loop of *pose a problem → solve → independent review → persist the
+conclusion → re-enter on backlog* until nothing remains.
 
 It is intentionally **not** a multi-vendor orchestrator. It provides one local view that combines:
 

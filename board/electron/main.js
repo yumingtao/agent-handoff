@@ -100,9 +100,9 @@ async function refreshStatus() {
 function updateTray() {
   if (!tray) return;
   tray.setImage(trayIcon());
-  tray.setToolTip(`Handoff Board: ${status.detail}`);
+  tray.setToolTip(`Loop Engineering Board: ${status.detail}`);
   tray.setContextMenu(Menu.buildFromTemplate([
-    { label: `Handoff Board · ${status.detail}`, enabled: false },
+    { label: `Loop Engineering Board · ${status.detail}`, enabled: false },
     { label: `App ${app.getVersion()} · Board ${boardVersion()}`, enabled: false },
     { type: 'separator' },
     { label: 'Open Board', click: openBoard },
@@ -133,7 +133,7 @@ async function runService(command) {
   } catch (error) {
     status = { state: 'error', detail: error.message };
     updateTray();
-    dialog.showErrorBox('Handoff Board', error.message);
+    dialog.showErrorBox('Loop Engineering Board', error.message);
   } finally {
     busy = false;
     await refreshStatus();
@@ -151,7 +151,7 @@ function openBoard() {
     height: 900,
     minWidth: 1100,
     minHeight: 600,
-    title: 'Handoff Board',
+    title: 'Loop Engineering Board',
     autoHideMenuBar: true,
     webPreferences: { preload: join(__dirname, 'preload.js'), contextIsolation: true, nodeIntegration: false, sandbox: true },
   });
@@ -173,7 +173,7 @@ function setAppAutostart(enabled) {
     const file = join(app.getPath('appData'), 'autostart', 'com.agent-handoff.board.desktop');
     if (enabled) {
       mkdirSync(dirname(file), { recursive: true });
-      writeFileSync(file, `[Desktop Entry]\nType=Application\nName=Handoff Board\nExec="${process.execPath}" --hidden\nX-GNOME-Autostart-enabled=true\n`, 'utf8');
+      writeFileSync(file, `[Desktop Entry]\nType=Application\nName=Loop Engineering Board\nExec="${process.execPath}" --hidden\nX-GNOME-Autostart-enabled=true\n`, 'utf8');
     } else if (existsSync(file)) unlinkSync(file);
   } else {
     app.setLoginItemSettings({ openAtLogin: enabled, openAsHidden: true });
@@ -188,7 +188,7 @@ async function setServiceAutostart(enabled) {
     serviceAutostart = enabled;
     await refreshStatus();
   } catch (error) {
-    dialog.showErrorBox('Handoff Board', error.message);
+    dialog.showErrorBox('Loop Engineering Board', error.message);
   }
 }
 
@@ -253,7 +253,7 @@ else app.whenReady().then(async () => {
     refreshTimer = setInterval(refreshStatus, 5000);
     if (process.platform === 'darwin') app.dock?.hide();
   } catch (error) {
-    dialog.showErrorBox('Handoff Board', error.message);
+    dialog.showErrorBox('Loop Engineering Board', error.message);
     app.quit();
   }
 });

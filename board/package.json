@@ -55,7 +55,7 @@
   "build": {
     "asar": true,
     "appId": "com.agent-handoff.board",
-    "productName": "Handoff Board",
+    "productName": "Loop Engineering Board",
     "icon": "assets/app-icon.png",
     "directories": {
       "output": "release"

@@ -13,14 +13,14 @@
 - **评审被锚定**：能看见原实现的 agent 倾向于认可原实现；独立评审需要隐藏 baseline。
 - **过程不可见**：claim / progress / block 状态埋在终端滚动区里，其他 agent 和你都看不见。
 
-agent-handoff 用一块本地黑板来回应：latest-wins 结论 + supersede 链、防锚定评审协议、实时过程面板。
+agent-handoff 用一块本地黑板来回应：latest-wins 结论 + supersede 链、防锚定评审协议、实时过程面板——即 **Loop Engineering Board**。这个名字是字面意义的：面板端到端观测一个回环——问题抛出、agent 解答、另一厂商 agent 独立评审、结论沉淀、有遗留则重新入环，直到归零。
 它**刻意不是**通用长期记忆系统——没有语义召回、没有 embedding。它存的是决策与交接，不是知识；需要按语义检索笔记时，请搭配记忆类工具使用。
 
 ```mermaid
 flowchart LR
     A["Agent A<br>(writer)"]
     B["Agent B<br>(other vendor)"]
-    L["Loop Board<br>(web + SSE :4319)"]
+    L["Loop Engineering Board<br>(web + SSE :4319)"]
 
     subgraph LOCAL["~/.agent-handoff · local blackboard"]
         S["handoff server<br>(MCP + SQLite)"]

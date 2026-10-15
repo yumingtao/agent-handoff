@@ -20,7 +20,11 @@ Switching agents today means leaving the context behind:
   scrollback, invisible to other agents and to you.
 
 agent-handoff answers with a local blackboard: latest-wins conclusions with
-supersede chains, an anti-anchoring review protocol, and a live process board.
+supersede chains, an anti-anchoring review protocol, and a live process board —
+the **Loop Engineering Board**. The name is literal: the board watches one loop
+end to end — a problem is posed, an agent solves it, a different agent
+independently reviews it, the conclusion persists, and any backlog re-enters
+the loop until nothing remains.
 It is deliberately **not** a general-purpose long-term memory — no semantic
 recall, no embeddings. It stores decisions and handoffs, not knowledge; if you
 need recall over notes, pair it with a memory tool.
@@ -29,7 +33,7 @@ need recall over notes, pair it with a memory tool.
 flowchart LR
     A["Agent A<br>(writer)"]
     B["Agent B<br>(other vendor)"]
-    L["Loop Board<br>(web + SSE :4319)"]
+    L["Loop Engineering Board<br>(web + SSE :4319)"]
 
     subgraph LOCAL["~/.agent-handoff · local blackboard"]
         S["handoff server<br>(MCP + SQLite)"]
