@@ -62,6 +62,39 @@ still apply.
 | `skills/` | Installable cross-agent review handoff skill (canonical Claude format; adapt per platform) |
 | `docs/` | Protocol and usage docs — start with `docs/independent-review-protocol.md` |
 
+## The loop, and loop engineering
+
+**Loop engineering** — a practice named in the AI industry in mid-2026 —
+designs systems where agents iterate on their own: *execute → verify →
+persist → re-enter*, until nothing remains. Its credo: the quality of a loop
+is the quality of its verifiable signals.
+
+agent-handoff is that idea in a **human-relayed** form: no orchestrator
+dispatches agents — you decide when work crosses a vendor boundary via one
+copy-ready prompt block. The infrastructure concentrates on the two hard
+parts of any loop:
+
+- **verifiable signal** — hidden-baseline independent review: the reviewer
+  assesses from a packet that withholds the baseline, so approval cannot be
+  anchored to the author's reasoning
+- **persistence** — latest-wins conclusions with supersede chains: every new
+  round starts from the authoritative record, never from chat scrollback
+
+| Loop stage | Capability |
+|---|---|
+| pose | `resolve_topic` · explicit task state (`open` / `done` / `cancelled`), auto-reopen on new publish |
+| solve | `publish_conclusion` · secret scanning · idempotent `request_id` |
+| review | `create_review_case` → `submit_independent_assessment` → `publish_review_comparison` (baseline revealed only after assessment) |
+| persist | latest-wins + supersede chains · canonical topics across projects/workspaces |
+| re-enter | ≤12-line copy-ready prompt block for the next vendor's agent |
+
+Watch the loop live on the board — topics with task states and supersede
+signal on the left, the cross-model workflow on the right (screenshots use
+isolated demo data):
+
+![Board — topics](docs/images/board-topics.png)
+![Board — workflow](docs/images/board-workflow.png)
+
 ## Highlights
 
 - **Hidden-baseline independent review**: the author agent publishes its work

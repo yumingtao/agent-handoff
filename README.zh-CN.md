@@ -47,6 +47,28 @@ flowchart LR
 | `skills/` | 可安装的跨 agent review 交接 skill（Claude 格式规范版；各平台按需适配） |
 | `docs/` | 协议与使用文档——从 `docs/independent-review-protocol.md` 开始 |
 
+## Loop engineering：回环与工程化
+
+**Loop engineering（回路工程）**——2026 年年中 AI 业界命名的实践——设计让 agent 自我迭代的系统：*执行 → 验证 → 持久化 → 再入环*，直到零遗留。其信条：回环的质量取决于它连接的可验证信号的质量。
+
+agent-handoff 是这一思想的**人搬运（human-relayed）**形态：没有编排器派发 agent——由你决定工作何时跨越厂商边界（一个可复制的 prompt block）。基础设施把力气花在任何回环最难的两件事上：
+
+- **可验证信号**——隐藏基线的独立评审：评审者从不含基线的 packet 出发评估，认可无法锚定到作者的推理
+- **持久化**——latest-wins 结论 + supersede 链：每一轮都从权威记录出发，而不是从聊天滚动区出发
+
+| 回环环节 | 工程能力 |
+|---|---|
+| 抛出问题 | `resolve_topic` · 显式任务状态（`open` / `done` / `cancelled`），新发布自动 reopen |
+| 解答 | `publish_conclusion` · 密钥扫描 · 幂等 `request_id` |
+| 评审 | `create_review_case` → `submit_independent_assessment` → `publish_review_comparison`（评估后才揭示基线） |
+| 沉淀 | latest-wins + supersede 链 · 跨 project/workspace 的规范化 topic |
+| 再入环 | 给下一厂商 agent 的 ≤12 行可复制 prompt block |
+
+在面板上实时观看回环——左侧是 topic 任务状态与 supersede 信号，右侧是跨模型工作流（截图为隔离的演示数据）：
+
+![面板 — topics](docs/images/board-topics.png)
+![面板 — workflow](docs/images/board-workflow.png)
+
 ## 亮点
 
 - **隐藏 baseline 的独立评审**：写方 agent 发布工作成果和一个隐藏 baseline 的评审 case；审方 agent 只凭 packet 评估被引用的代码，  提交 assessment 之后才揭示 baseline——一套防锚定的 A/B 协议。

@@ -15,6 +15,13 @@ re-enters the loop until nothing remains.
 - separate `agent_events` protocol for claim/progress/block/release/heartbeat
 - local ops for health, backup, and cleanup preview
 
+Screenshots (isolated demo data):
+
+![Board — topics](../docs/images/board-topics.png)
+![Board — topic detail with supersede chain](../docs/images/board-topic-detail.png)
+![Board — agents](../docs/images/board-agents.png)
+![Board — workflow](../docs/images/board-workflow.png)
+
 ## Run
 
 > **Port guide for agents**
@@ -92,9 +99,19 @@ The app manages the Board as an independent service:
 - Windows: Scheduled Task
 - Linux: `systemd --user`
 
-The tray menu provides Board start, stop, restart, status, dashboard, logs, and
-separate App/Board login-start settings. The Board service uses the existing
-`~/.agent-handoff` data directory and the app never replaces it during updates.
+The tray menu (items track live service status):
+
+| Group | Items |
+|---|---|
+| status | `Loop Engineering Board · <status>` · `App <version> · Board <version>` |
+| open | Open Board · Open in Browser |
+| service | Start · Stop · Restart |
+| autostart | Start Board at Login · Start App at Login (checkboxes) |
+| ops | Open Logs · Check for Updates / Download Update / Install Update |
+| quit | Quit |
+
+The Board service uses the existing `~/.agent-handoff` data directory and the
+app never replaces it during updates.
 
 The packaged app requires Node.js `>=22.5` because the Board server uses
 `node:sqlite`. Set `SYSTEM_NODE` when Node is installed outside the standard
