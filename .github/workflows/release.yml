@@ -1,0 +1,30 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  mac:
+    name: mac app (dmg + zip, arm64 + x64)
+    runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: board
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: board/package-lock.json
+      - run: npm ci
+      - run: npm run build
+      - run: npm run build:server
+      # ad-hoc signed (identity: null); artifacts + latest-mac.yml go to the GitHub Release for this tag
+      - run: npx electron-builder --mac dmg zip --arm64 --x64 --publish always
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

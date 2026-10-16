@@ -125,6 +125,17 @@ platform locations. For generic-provider updates, set
 `HANDOFF_BOARD_UPDATE_URL` to the directory containing the updater metadata
 before launching the packaged app.
 
+### Releases
+
+Pushing a `v*` tag builds and publishes the mac app (arm64 + x64, dmg + zip)
+to GitHub Releases via `.github/workflows/release.yml`. The app is ad-hoc
+signed (`identity: null`, no Apple Developer certificate): Gatekeeper asks
+for a first-run approval (right-click → Open).
+
+For auto-updates, set `HANDOFF_BOARD_UPDATE_URL` to
+`https://github.com/yumingtao/agent-handoff/releases/latest/download` — the
+pipeline uploads `latest-mac.yml` next to the artifacts.
+
 ## Publish agent events
 
 The board now uses a separate local SQLite event stream instead of overloading handoff conclusions for process state.

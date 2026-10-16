@@ -49,6 +49,7 @@ jobs:
       - run: npm run check
       - run: npm run typecheck
       - run: npm test
+      - run: npm run test:electron
       - run: npm run build
 
   packages:

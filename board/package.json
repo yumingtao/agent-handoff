@@ -81,8 +81,14 @@
         "to": "tray/tray-icon.png"
       }
     ],
+    "publish": {
+      "provider": "github",
+      "owner": "yumingtao",
+      "repo": "agent-handoff"
+    },
     "mac": {
       "icon": "assets/app-icon.icns",
+      "identity": "-",
       "target": [
         "dmg",
         "zip"
