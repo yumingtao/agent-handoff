@@ -33,5 +33,7 @@ jobs:
       - run: |
           gh release view "$GITHUB_REF_NAME" || gh release create "$GITHUB_REF_NAME" --generate-notes
           gh release upload "$GITHUB_REF_NAME" release/*.dmg release/*.zip release/*.blockmap release/latest-mac.yml --clobber
+          # electron-builder leaves the release in draft when its own uploads drop assets; publish it once complete
+          gh release edit "$GITHUB_REF_NAME" --draft=false
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
