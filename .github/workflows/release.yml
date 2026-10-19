@@ -28,3 +28,10 @@ jobs:
       - run: npx electron-builder --mac dmg zip --arm64 --x64 --publish always
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # electron-builder's concurrent multi-arch uploads can silently drop release assets (exit 0);
+      # re-upload everything from disk idempotently so the release is always complete
+      - run: |
+          gh release view "$GITHUB_REF_NAME" || gh release create "$GITHUB_REF_NAME" --generate-notes
+          gh release upload "$GITHUB_REF_NAME" release/*.dmg release/*.zip release/*.blockmap release/latest-mac.yml --clobber
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
