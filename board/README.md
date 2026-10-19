@@ -129,8 +129,13 @@ before launching the packaged app.
 
 Pushing a `v*` tag builds and publishes the mac app (arm64 + x64, dmg + zip)
 to GitHub Releases via `.github/workflows/release.yml`. The app is ad-hoc
-signed (`identity: null`, no Apple Developer certificate): Gatekeeper asks
+signed (`identity: "-"`, no Apple Developer certificate): Gatekeeper asks
 for a first-run approval (right-click → Open).
+
+Windows/Linux targets are configured in `package.json` (`nsis`/`zip`,
+`AppImage`/`deb`) but **not published yet** — no real-machine validation has
+been done (node discovery, tray, autostart). Enabling them means adding
+win/linux jobs to `release.yml` and validating on an actual machine first.
 
 For auto-updates, set `HANDOFF_BOARD_UPDATE_URL` to
 `https://github.com/yumingtao/agent-handoff/releases/latest/download` — the
